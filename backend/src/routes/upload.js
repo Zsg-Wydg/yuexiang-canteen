@@ -7,7 +7,8 @@ import { fileURLToPath } from 'node:url';
 import { authRequired } from '../middleware/auth.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const UPLOAD_DIR = path.join(__dirname, '..', 'uploads');
+// 本文件位于 src/routes/，需向上两级到 backend/ 再进入 uploads（与 server.js 静态目录一致）
+const UPLOAD_DIR = path.join(__dirname, '..', '..', 'uploads');
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
 const storage = multer.diskStorage({
