@@ -1,0 +1,22 @@
+{
+  "name": "yuexiang-canteen-backend",
+  "version": "1.0.0",
+  "description": "悦享食堂 - 校园美食点餐平台后端服务",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "init": "node src/init-db.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

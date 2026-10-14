@@ -1,0 +1,15 @@
+# 依赖目录（在云端重新安装，不传 GitHub）
+node_modules/
+**/node_modules/
+
+# 前端构建产物（云端构建时重新生成）
+frontend/dist/
+
+# 本地数据库与上传文件（云端首次启动自动建库、写入演示数据、生成示例图片）
+backend/data/
+backend/uploads/
+
+# 日志与系统文件
+*.log
+.DS_Store
+Thumbs.db
