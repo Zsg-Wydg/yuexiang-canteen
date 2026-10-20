@@ -26,7 +26,8 @@ const routes = [
       { path: '', redirect: '/admin/dashboard' },
       { path: 'dashboard', name: 'adminDashboard', component: () => import('@/views/admin/Dashboard.vue') },
       { path: 'users', name: 'adminUsers', component: () => import('@/views/admin/Users.vue') },
-      { path: 'products', name: 'adminProducts', component: () => import('@/views/admin/Products.vue') }
+      { path: 'products', name: 'adminProducts', component: () => import('@/views/admin/Products.vue') },
+      { path: 'orders', name: 'adminOrders', component: () => import('@/views/admin/Orders.vue') }
     ]
   }
 ];

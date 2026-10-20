@@ -45,6 +45,8 @@ export const adminDeleteUser = (id) => request.delete(`/admin/users/${id}`);
 export const adminGetProducts = (params) => request.get('/admin/products', { params });
 export const adminSetProductStatus = (id, status) => request.patch(`/admin/products/${id}/status`, { status });
 export const adminDeleteProduct = (id) => request.delete(`/admin/products/${id}`);
+export const adminGetOrders = (params) => request.get('/admin/orders', { params });
+export const adminDeleteOrder = (id) => request.delete(`/admin/orders/${id}`);
 
 // ---- 图片上传 ----
 export const uploadImage = (file) => {

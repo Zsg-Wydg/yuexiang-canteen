@@ -98,4 +98,53 @@ router.delete('/products/:id', (req, res) => {
   res.json({ message: '删除成功' });
 });
 
+// 全站交易订单列表
+router.get('/orders', (req, res) => {
+  const page = Math.max(1, parseInt(req.query.page) || 1);
+  const pageSize = 10;
+  const where = [];
+  const params = {};
+  if (req.query.keyword) {
+    where.push('(o.order_no LIKE $kw OR p.title LIKE $kw OR ub.nickname LIKE $kw OR us.nickname LIKE $kw)');
+    params.$kw = `%${req.query.keyword}%`;
+  }
+  if (['pending', 'agreed', 'rejected', 'completed', 'canceled'].includes(req.query.status)) {
+    where.push('o.status = $status');
+    params.$status = req.query.status;
+  }
+  const whereSql = where.length ? 'WHERE ' + where.join(' AND ') : '';
+  const total = db.prepare(`
+    SELECT COUNT(*) AS c FROM orders o
+    JOIN users ub ON ub.id = o.buyer_id
+    JOIN users us ON us.id = o.seller_id
+    JOIN products p ON p.id = o.product_id
+    ${whereSql}
+  `).get(params).c;
+  const rows = db.prepare(`
+    SELECT o.id, o.order_no, o.product_id, o.buyer_id, o.seller_id, o.price, o.remark,
+           o.status, o.created_at, o.updated_at,
+           p.title AS product_title, p.images AS product_images,
+           ub.nickname AS buyer_name, us.nickname AS seller_name
+    FROM orders o
+    JOIN users ub ON ub.id = o.buyer_id
+    JOIN users us ON us.id = o.seller_id
+    JOIN products p ON p.id = o.product_id
+    ${whereSql}
+    ORDER BY o.created_at DESC
+    LIMIT $limit OFFSET $offset
+  `).all({ ...params, $limit: pageSize, $offset: (page - 1) * pageSize });
+  res.json({
+    total, page,
+    list: rows.map((r) => ({ ...r, product_images: JSON.parse(r.product_images || '[]') }))
+  });
+});
+
+// 管理员删除订单
+router.delete('/orders/:id', (req, res) => {
+  const o = db.prepare('SELECT * FROM orders WHERE id = ?').get(req.params.id);
+  if (!o) return res.status(404).json({ message: '订单不存在' });
+  db.prepare('DELETE FROM orders WHERE id = ?').run(o.id);
+  res.json({ message: '删除成功' });
+});
+
 export default router;

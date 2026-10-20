@@ -15,6 +15,9 @@
         <el-menu-item index="/admin/products">
           <el-icon><Goods /></el-icon><span>菜品管理</span>
         </el-menu-item>
+        <el-menu-item index="/admin/orders">
+          <el-icon><List /></el-icon><span>交易订单</span>
+        </el-menu-item>
       </el-menu>
       <router-link to="/" class="back-link">← 返回网站首页</router-link>
     </aside>
@@ -25,7 +28,7 @@
 </template>
 
 <script setup>
-import { DataLine, User, Goods } from '@element-plus/icons-vue';
+import { DataLine, User, Goods, List } from '@element-plus/icons-vue';
 </script>
 
 <style scoped>

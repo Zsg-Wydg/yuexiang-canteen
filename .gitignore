@@ -11,7 +11,6 @@ backend/uploads/
 
 # 日志与系统文件
 *.log
-cloudflared.exe
 .DS_Store
 Thumbs.db
 

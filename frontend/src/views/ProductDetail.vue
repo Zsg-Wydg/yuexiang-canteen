@@ -215,9 +215,8 @@ onMounted(loadAll);
 <style scoped>
 .crumb { margin-bottom: 16px; }
 .detail-wrap { display: grid; grid-template-columns: 460px 1fr; gap: 20px; }
-.gallery { padding: 10px; }
-.gallery :deep(.el-carousel) { width: 100%; }
-.gallery-img { width: 100%; height: 100%; display: block; }
+.gallery { padding: 10px; display: flex; align-items: center; }
+.gallery-img { width: 100%; height: 100%; }
 .main-card { padding: 26px; }
 
 .title { font-size: 22px; margin: 0 0 14px; line-height: 1.4; }
