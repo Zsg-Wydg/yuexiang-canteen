@@ -24,7 +24,6 @@
             <el-image
               v-if="row.product_images && row.product_images[0]"
               :src="row.product_images[0]"
-              :preview-src-list="row.product_images"
               fit="cover" class="thumb"
             />
             <span class="title">{{ row.product_title }}</span>
